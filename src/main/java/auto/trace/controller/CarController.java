@@ -3,12 +3,12 @@ package auto.trace.controller;
 import auto.trace.dto.CarDto;
 import auto.trace.entity.Car;
 import auto.trace.service.CarService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class CarController {
@@ -19,9 +19,14 @@ public class CarController {
         this.carService = carService;
     }
 
+    @GetMapping("/get")
+    public ResponseEntity<List<Car>> getCarsFromUser(@RequestHeader("X-User-Id") Long userId) {
+        return new ResponseEntity<>(carService.getCarsFromUser(userId), HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<Car> add(@RequestHeader("X-User-Id") Long userId,
-                                   @RequestBody CarDto carDto) {
+                                   @Valid @RequestBody CarDto carDto) {
 
         return new ResponseEntity<>(carService.addCar(userId, carDto), HttpStatus.CREATED);
     }

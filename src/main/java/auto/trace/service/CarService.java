@@ -5,6 +5,8 @@ import auto.trace.entity.Car;
 import auto.trace.repository.CarRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CarService {
 
@@ -12,6 +14,10 @@ public class CarService {
 
     public CarService(CarRepository carRepository) {
         this.carRepository = carRepository;
+    }
+
+    public List<Car> getCarsFromUser(Long userId) {
+        return carRepository.findByUserId(userId);
     }
 
     public Car addCar(Long userId, CarDto carDto) {
