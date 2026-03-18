@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/brand")
+@RequestMapping("/brands")
 public class BrandController {
 
     private final BrandService brandService;
@@ -20,7 +20,7 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<List<BrandDto>> getBrands() {
         return new ResponseEntity<>(brandService.getBrands(), HttpStatus.OK);
     }

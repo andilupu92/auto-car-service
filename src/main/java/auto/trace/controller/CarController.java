@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/cars")
 public class CarController {
 
     private final CarService carService;
@@ -19,12 +20,12 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<List<Car>> getCarsFromUser(@RequestHeader("X-User-Id") Long userId) {
         return new ResponseEntity<>(carService.getCarsFromUser(userId), HttpStatus.OK);
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<Car> add(@RequestHeader("X-User-Id") Long userId,
                                    @Valid @RequestBody CarDto carDto) {
 
