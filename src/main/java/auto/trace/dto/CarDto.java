@@ -3,13 +3,11 @@ package auto.trace.dto;
 import auto.trace.annotation.MaxCurrentYear;
 import jakarta.validation.constraints.*;
 
-public record CarDto(@NotBlank(message = "Brand is required")
-                     @Size(min = 2, max = 50, message = "Brand must be between 2 and 50 characters")
-                     String brand,
+public record CarDto(@NotNull(message = "Brand is required")
+                     Long brandId,
 
-                     @NotBlank(message = "Model is required")
-                     @Size(min = 1, max = 50, message = "Model must be between 1 and 50 characters")
-                     String model,
+                     @NotNull(message = "Model is required")
+                     Long modelId,
 
                      @NotNull(message = "Year is required")
                      @Min(value = 1886, message = "Year must be after 1886")

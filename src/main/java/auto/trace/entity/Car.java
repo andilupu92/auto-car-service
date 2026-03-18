@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "cars")
 public class Car {
 
@@ -26,11 +28,11 @@ public class Car {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(name = "brand", nullable = false, length = 100)
-    private String brand;
+    @Column(name = "brand_id", nullable = false)
+    private Long brandId;
 
-    @Column(name = "model", nullable = false, length = 100)
-    private String model;
+    @Column(name = "model_id", nullable = false)
+    private Long modelId;
 
     @Column(name = "year", nullable = false)
     private Integer year;

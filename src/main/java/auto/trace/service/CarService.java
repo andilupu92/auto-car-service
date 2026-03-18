@@ -24,8 +24,8 @@ public class CarService {
 
         Car c = Car.builder()
                 .userId(userId)
-                .brand(carDto.brand())
-                .model(carDto.model())
+                .brandId(carDto.brandId())
+                .modelId(carDto.modelId())
                 .year(carDto.year())
                 .kilometers(carDto.kilometers())
                 .build();
