@@ -1,9 +1,9 @@
-package auto.trace.dto;
+package auto.trace.dto.request;
 
 import auto.trace.annotation.MaxCurrentYear;
 import jakarta.validation.constraints.*;
 
-public record CarDto(@NotNull(message = "Brand is required")
+public record CarRequest(@NotNull(message = "Brand is required")
                      Long brandId,
 
                      @NotNull(message = "Model is required")

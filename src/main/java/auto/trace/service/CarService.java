@@ -1,7 +1,9 @@
 package auto.trace.service;
 
-import auto.trace.dto.CarDto;
+import auto.trace.dto.request.CarRequest;
+import auto.trace.dto.response.CarResponse;
 import auto.trace.entity.Car;
+import auto.trace.mapper.CarMapper;
 import auto.trace.repository.CarRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +13,22 @@ import java.util.List;
 public class CarService {
 
     private final CarRepository carRepository;
+    private final CarMapper carMapper;
 
-    public CarService(CarRepository carRepository) {
+    public CarService(CarRepository carRepository, CarMapper carMapper) {
         this.carRepository = carRepository;
+        this.carMapper = carMapper;
     }
 
-    public List<Car> getCarsFromUser(Long userId) {
-        return carRepository.findByUserId(userId);
+    public List<CarResponse> getCarsFromUser(Long userId) {
+        return carMapper.toResponseList(carRepository.findByUserId(userId));
     }
 
-    public Car addCar(Long userId, CarDto carDto) {
+    public CarResponse addCar(Long userId, CarRequest carRequest) {
 
-        Car c = Car.builder()
-                .userId(userId)
-                .brandId(carDto.brandId())
-                .modelId(carDto.modelId())
-                .year(carDto.year())
-                .kilometers(carDto.kilometers())
-                .build();
+        Car c = carMapper.toEntity(carRequest);
+        c.setUserId(userId);
 
-        return carRepository.save(c);
+        return carMapper.toResponse(carRepository.save(c));
     }
 }

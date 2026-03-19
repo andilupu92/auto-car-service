@@ -1,7 +1,7 @@
 package auto.trace.controller;
 
-import auto.trace.dto.CarDto;
-import auto.trace.entity.Car;
+import auto.trace.dto.request.CarRequest;
+import auto.trace.dto.response.CarResponse;
 import auto.trace.service.CarService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -21,14 +21,14 @@ public class CarController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Car>> getCarsFromUser(@RequestHeader("X-User-Id") Long userId) {
+    public ResponseEntity<List<CarResponse>> getCarsFromUser(@RequestHeader("X-User-Id") Long userId) {
         return new ResponseEntity<>(carService.getCarsFromUser(userId), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Car> add(@RequestHeader("X-User-Id") Long userId,
-                                   @Valid @RequestBody CarDto carDto) {
+    public ResponseEntity<CarResponse> add(@RequestHeader("X-User-Id") Long userId,
+                                           @Valid @RequestBody CarRequest carRequest) {
 
-        return new ResponseEntity<>(carService.addCar(userId, carDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(carService.addCar(userId, carRequest), HttpStatus.CREATED);
     }
 }

@@ -1,6 +1,6 @@
 package auto.trace.controller;
 
-import auto.trace.dto.ModelDto;
+import auto.trace.dto.response.ModelResponse;
 import auto.trace.service.ModelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class ModelController {
     }
 
     @GetMapping("/{brandId}")
-    public ResponseEntity<List<ModelDto>> getModelsFromBrand(@PathVariable Long brandId) {
+    public ResponseEntity<List<ModelResponse>> getModelsFromBrand(@PathVariable Long brandId) {
         return new ResponseEntity<>(modelService.getModelsFromBrand(brandId), HttpStatus.OK);
     }
 }

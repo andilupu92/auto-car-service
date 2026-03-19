@@ -1,6 +1,6 @@
 package auto.trace.controller;
 
-import auto.trace.dto.BrandDto;
+import auto.trace.dto.response.BrandResponse;
 import auto.trace.service.BrandService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class BrandController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BrandDto>> getBrands() {
+    public ResponseEntity<List<BrandResponse>> getBrands() {
         return new ResponseEntity<>(brandService.getBrands(), HttpStatus.OK);
     }
 }

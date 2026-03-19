@@ -1,6 +1,6 @@
 package auto.trace.service;
 
-import auto.trace.dto.ModelDto;
+import auto.trace.dto.response.ModelResponse;
 import auto.trace.mapper.ModelMapper;
 import auto.trace.repository.ModelRepository;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class ModelService {
         this.modelMapper = modelMapper;
     }
 
-    public List<ModelDto> getModelsFromBrand(Long brandId) {
+    public List<ModelResponse> getModelsFromBrand(Long brandId) {
         return modelMapper.toResponseList(modelRepository.findByBrandId(brandId));
     }
 }
