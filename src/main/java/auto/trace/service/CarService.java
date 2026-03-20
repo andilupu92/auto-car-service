@@ -5,6 +5,7 @@ import auto.trace.dto.response.CarResponse;
 import auto.trace.entity.Car;
 import auto.trace.mapper.CarMapper;
 import auto.trace.repository.CarRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,11 +25,19 @@ public class CarService {
         return carMapper.toResponseList(carRepository.findByUserId(userId));
     }
 
-    public CarResponse addCar(Long userId, CarRequest carRequest) {
+    public CarResponse save(Long userId, CarRequest carRequest, Long id) {
+        Car c;
 
-        Car c = carMapper.toEntity(carRequest);
+        if (id != null) {
+            c = carRepository.findById(id)
+                    .orElseThrow(() -> new EntityNotFoundException("Car not found: " + id));
+            carMapper.updateEntityFromRequest(carRequest, c);
+        } else {
+            c = carMapper.toEntity(carRequest);
+        }
+
         c.setUserId(userId);
-
         return carMapper.toResponse(carRepository.save(c));
     }
+
 }

@@ -29,6 +29,14 @@ public class CarController {
     public ResponseEntity<CarResponse> add(@RequestHeader("X-User-Id") Long userId,
                                            @Valid @RequestBody CarRequest carRequest) {
 
-        return new ResponseEntity<>(carService.addCar(userId, carRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(carService.save(userId, carRequest, null), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CarResponse> update(@RequestHeader("X-User-Id") Long userId,
+                                              @Valid @RequestBody CarRequest carRequest,
+                                              @PathVariable Long id) {
+
+        return new ResponseEntity<>(carService.save(userId, carRequest, id), HttpStatus.OK);
     }
 }
