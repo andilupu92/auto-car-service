@@ -7,6 +7,7 @@ import auto.trace.mapper.CarMapper;
 import auto.trace.repository.CarRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class CarService {
         return carMapper.toResponseList(carRepository.findByUserId(userId));
     }
 
+    @Transactional
     public CarResponse save(Long userId, CarRequest carRequest, Long id) {
         Car c;
 

@@ -28,11 +28,13 @@ public class Car {
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(name = "brand_id", nullable = false)
-    private Long brandId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "brand_id", nullable = false)
+    private Brand brand;
 
-    @Column(name = "model_id", nullable = false)
-    private Long modelId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "model_id", nullable = false)
+    private Model model;
 
     @Column(name = "year", nullable = false)
     private Integer year;
