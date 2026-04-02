@@ -3,6 +3,7 @@ package auto.trace.service;
 import auto.trace.dto.request.CarRequest;
 import auto.trace.dto.response.CarResponse;
 import auto.trace.entity.Car;
+import auto.trace.exception.ResourceNotFoundException;
 import auto.trace.mapper.CarMapper;
 import auto.trace.repository.CarRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -42,4 +43,10 @@ public class CarService {
         return carMapper.toResponse(carRepository.save(c));
     }
 
+    public void delete(Long id) {
+        if (!carRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Car not found with id: " + id);
+        }
+        carRepository.deleteById(id);
+    }
 }
