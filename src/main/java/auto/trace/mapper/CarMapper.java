@@ -15,6 +15,7 @@ public interface CarMapper {
 
     @Mapping(source = "brand.id", target = "brandId")
     @Mapping(source = "brand.name", target = "brandName")
+    @Mapping(source = "brand.logoUrl", target = "logoUrl")
     @Mapping(source = "model.id", target = "modelId")
     @Mapping(source = "model.name", target = "modelName")
     CarResponse toResponse(Car car);
