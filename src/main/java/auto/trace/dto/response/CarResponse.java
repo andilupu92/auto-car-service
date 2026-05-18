@@ -1,11 +1,12 @@
 package auto.trace.dto.response;
 
+import java.math.BigDecimal;
+
 public record CarResponse(Long id,
-                          Long brandId,
-                          String brandName,
-                          String logoUrl,
-                          Long modelId,
-                          String modelName,
+                          String name,
+                          String energyType,
+                          Integer kilometers,
                           Integer year,
-                          Integer kilometers
+                          BigDecimal consumption,
+                          Integer healthScore
 ) { }

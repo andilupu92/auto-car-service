@@ -3,11 +3,11 @@ package auto.trace.dto.request;
 import auto.trace.annotation.MaxCurrentYear;
 import jakarta.validation.constraints.*;
 
-public record CarRequest(@NotNull(message = "Brand is required")
-                     Long brandId,
+public record CarRequest(@NotNull(message = "Name is required")
+                     String name,
 
-                     @NotNull(message = "Model is required")
-                     Long modelId,
+                     @NotNull(message = "EnergyType is required")
+                     String energyType,
 
                      @NotNull(message = "Year is required")
                      @Min(value = 1886, message = "Year must be after 1886")
